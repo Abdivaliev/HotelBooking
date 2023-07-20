@@ -5,14 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Price {
-    private List<PriceByStatus> priceByStatus;
-    private List<PriceBySquare> priceBySquare;
-    private List<PriceByEachBed> priceByEachBed;
+public class PriceByEachBed {
+    private String typeOfBed;
+    private Integer price;
 }

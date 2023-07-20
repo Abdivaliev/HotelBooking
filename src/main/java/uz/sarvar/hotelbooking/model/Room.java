@@ -19,5 +19,4 @@ public class Room {
     private RoomStatus status;
     private Integer square;
     private Integer numberOfRooms;
-
 }
