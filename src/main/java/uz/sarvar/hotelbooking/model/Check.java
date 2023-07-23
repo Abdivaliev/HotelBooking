@@ -13,10 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Check {
+    private Integer id;
     private Integer price;
     private Timestamp startDate;
     private Timestamp endDate;
     private String clientName;
     private List<Room> rooms;
+    private Hotel hotel;
     private String extraInfo;
+
 }

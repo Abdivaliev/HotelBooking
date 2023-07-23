@@ -16,7 +16,8 @@ public class Room {
     private String extra;
     private boolean isBooked;
     private Integer numberOfBeds;
-    private RoomStatus status;
-    private Integer square;
+    private String status;
+    private Double square;
     private Integer numberOfRooms;
+    private Integer number;
 }

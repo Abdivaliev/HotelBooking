@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Price {
+    private Integer basicPrice;
     private List<PriceByStatus> priceByStatus;
     private List<PriceBySquare> priceBySquare;
     private List<PriceByEachBed> priceByEachBed;

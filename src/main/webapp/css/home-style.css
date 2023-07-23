@@ -1,0 +1,34 @@
+.navbar{
+    background-color: #dcdcdc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+}
+.btns{
+    margin-top: 10px;
+}
+
+.borderLeft{
+    border-left: 1px #0c0c0c solid;
+}
+.borderRight{
+    border-right: 1px #0c0c0c solid;
+}
+.scrollable {
+    height: 85vh;
+    overflow-y: scroll;
+}
+.scrollable::-webkit-scrollbar {
+    width: 12px;
+}
+.scrollable::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 6px;
+}
+.sticky{
+    position: sticky;
+    top:0;
+    background-color: #ffffff;
+}

@@ -14,10 +14,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Booking {
     private Integer id;
-    private RoomStatus status;
+    private String status;
     private Integer numberOfBeds;
     private Timestamp startDate;
     private Timestamp endDate;
-    private Client client;
-
+    private User client;
 }
