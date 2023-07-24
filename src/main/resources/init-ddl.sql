@@ -5,12 +5,12 @@ CREATE TABLE room
     id            SERIAL PRIMARY KEY,
     balcony       BOOLEAN DEFAULT FALSE,
     extra         VARCHAR(255),
-    isBooked      BOOLEAN DEFAULT FALSE,
-    numberOfBeds  INTEGER,
-    statusRoom    VARCHAR(255),
+    is_booked      BOOLEAN DEFAULT FALSE,
+    number_of_beds  INTEGER,
+    status_of_room    VARCHAR(255),
     square        NUMERIC,
-    numberOfRooms INTEGER,
-    roomNumber    INTEGER,
+    number_of_rooms INTEGER,
+    room_number    INTEGER,
     photoLink     TEXT
 );
 
@@ -28,7 +28,7 @@ CREATE TABLE users
 CREATE TABLE booking
 (
     id             SERIAL PRIMARY KEY,
-    status         VARCHAR(255) NOT NULL,
+    status_room         VARCHAR(255) NOT NULL,
     number_of_beds INTEGER      NOT NULL,
     start_date     DATE         NOT NULL,
     end_date       DATE         NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE hotel
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(255) NOT NULL,
     email       VARCHAR(255) NOT NULL UNIQUE ,
-    phoneNumber VARCHAR(255) NOT NULL UNIQUE ,
+    phone_number VARCHAR(255) NOT NULL UNIQUE ,
     description TEXT
 );
 
@@ -50,12 +50,12 @@ CREATE TABLE reservation
 (
     id         SERIAL PRIMARY KEY,
     price      INTEGER NOT NULL,
-    startDate  DATE NOT NULL,
-    endDate    DATE NOT NULL,
-    clientName VARCHAR(255) NOT NULL,
-    roomNumber INTEGER NOT NULL,
+    start_date  DATE NOT NULL,
+    end_date    DATE NOT NULL,
+    client_name VARCHAR(255) NOT NULL,
+    room_number INTEGER NOT NULL,
     hotelId    INTEGER REFERENCES hotel (id),
-    extraInfo  TEXT
+    extra_info  TEXT
 );
 
 

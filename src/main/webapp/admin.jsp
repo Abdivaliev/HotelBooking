@@ -118,17 +118,14 @@
                 <div class="row mt-4 mb-4">
                     <% for (Room s : roomlist) {%>
                     <div class="col-md-4 p-3 shadow">
-                        <img src="<%=s.getExtra() %>" alt="rasm topilmadi" width="100%">
-<%--                        <img src="https://www.usatoday.com/gcdn/-mm-/05b227ad5b8ad4e9dcb53af4f31d7fbdb7fa901b/c=0-64-2119-1259/local/-/media/USATODAY/USATODAY/2014/08/13/1407953244000-177513283.jpg"--%>
-<%--                             alt="booking-image" width="100%">--%>
-<%--                        shundan pasti kopy qilinadi--%>
+                        <img src="<%=s.getPhotoLink() %>" alt="image not found" width="100%">
+
                         <div class="d-flex justify-content-between mt-2">
                             <div>Room number</div>
                             <div>
                                 <%=s.getRoomNumber()%>
                             </div>
                         </div>
-<%--                        //gacha--%>
                     </div>
                     <%
                         }

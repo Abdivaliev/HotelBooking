@@ -18,7 +18,6 @@ public class ConnectionSource {
     //  Database credentials
     private static final String USER = "postgres";
     private static final String PASS = "1";
-    private Connection sharedConnection;
 
     private static final ConnectionSource instance = new ConnectionSource();
 
@@ -34,7 +33,7 @@ public class ConnectionSource {
     private ConnectionSource() {
         try {
             DriverManager.registerDriver(new org.postgresql.Driver());
-//
+
 //            try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
 //                try (Statement statement = conn.createStatement()) {
 //                    statement.execute(getSql("init-ddl.sql"));

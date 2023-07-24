@@ -37,7 +37,8 @@ public class UserDAO {
         String insertQuery = " INSERT INTO users(first_name, surname, phone_number, email, role) " +
                 "VALUES('" +firstName + "', '" + surname + "', '+" + phoneNumber + "', '" + email + "', '" + Role.USER.name() + "'); ";
         Statement statement = connection.createConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(insertQuery);
+         statement.executeUpdate(insertQuery,Statement.RETURN_GENERATED_KEYS);
+        ResultSet resultSet = statement.getGeneratedKeys();
         while (resultSet.next()) {
             user=new User(
                     resultSet.getInt(1),

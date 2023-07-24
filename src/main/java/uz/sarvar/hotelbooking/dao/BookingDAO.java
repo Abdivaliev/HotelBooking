@@ -45,12 +45,14 @@ public class BookingDAO {
 
     public boolean save(String statusRoom, String numberOfBeds, String startDate, String endDate, String firstName, String surname, String phoneNumber, String email) throws SQLException {
         User user = userDAO.save(firstName, surname, phoneNumber, email);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        Integer numOfBeds = Integer.valueOf(numberOfBeds);
+        System.out.println(startDate);
+        System.out.println(endDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyy-MM-dd");
+        int numOfBeds = Integer.parseInt(numberOfBeds);
         LocalDate from = LocalDate.parse(startDate, formatter);
         LocalDate to = LocalDate.parse(endDate, formatter);
 
-        String insertBookingQuery = "insert into booking (status, number_of_beds, start_date, end_date, client_id) " +
+        String insertBookingQuery = "insert into booking (status_room, number_of_beds, start_date, end_date, client_id) " +
                 "values ('" + statusRoom + "','" + numOfBeds + "'," + from + "," + to + "," + user.getId() + ");";
 
         if (user != null) {
