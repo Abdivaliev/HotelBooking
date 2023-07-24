@@ -28,7 +28,7 @@ public class BookingDAO {
             while (rs.next()) {
                 Booking booking = new Booking();
                 booking.setId(rs.getInt("id"));
-                booking.setStatusRoom(String.valueOf(RoomStatus.valueOf(rs.getString("status"))));
+                booking.setStatusRoom(String.valueOf(RoomStatus.valueOf(rs.getString("status_of_room"))));
                 booking.setNumberOfBeds(rs.getInt("number_of_beds"));
                 booking.setStartDate(rs.getDate("start_date").toLocalDate());
                 booking.setEndDate(rs.getDate("end_date").toLocalDate());
@@ -53,7 +53,7 @@ public class BookingDAO {
         LocalDate to = LocalDate.parse(endDate, formatter);
 
         String insertBookingQuery = "insert into booking (status_room, number_of_beds, start_date, end_date, client_id) " +
-                "values ('" + statusRoom + "','" + numOfBeds + "'," + from + "," + to + "," + user.getId() + ");";
+                "values ('" + statusRoom + "','" + numOfBeds + "','" + from + "','" + to + "'," + user.getId() + ");";
 
         if (user != null) {
             Statement statement = connection.createConnection().createStatement();

@@ -165,10 +165,10 @@
     <h3>Login Here</h3>
 
     <label for="username" >Username</label>
-    <input type="text" placeholder="Your email" id="username" name="username">
+    <input type="text" placeholder="Your email" id="username" name="username" required>
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Your password" id="password" name="password">
+    <input type="password" placeholder="Your password" id="password" name="password" required>
 
     <button>Log In</button>
 

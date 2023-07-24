@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 
 @WebServlet(name = "booking", value = "/booking")
@@ -25,7 +26,6 @@ public class BookingController extends HttpServlet {
         response.sendRedirect("login.jsp");
     }
 
-    @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String firstName = req.getParameter("firstName");
@@ -36,7 +36,12 @@ public class BookingController extends HttpServlet {
         String phoneNumber = req.getParameter("phoneNumber");
         String email = req.getParameter("email");
         String numberOfBeds = req.getParameter("numberOfBeds");
-        bookingDAO.save(statusRoom, numberOfBeds, startDate, endDate, firstName, surname, phoneNumber, email);
+        try {
+            boolean saved = bookingDAO.save(statusRoom, numberOfBeds, startDate, endDate, firstName, surname, phoneNumber, email);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void destroy() {

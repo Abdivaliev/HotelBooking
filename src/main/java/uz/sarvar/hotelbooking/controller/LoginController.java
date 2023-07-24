@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import lombok.SneakyThrows;
 import uz.sarvar.hotelbooking.ConnectionSource;
 import uz.sarvar.hotelbooking.dao.BookingDAO;
+import uz.sarvar.hotelbooking.dao.UserDAO;
+import uz.sarvar.hotelbooking.util.Role;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,20 +23,33 @@ import java.util.List;
 @WebServlet(name = "login", value = "/login")
 public class LoginController extends HttpServlet {
     private String message;
+    private UserDAO userDAO = UserDAO.getInstance();
 
     public void init() {
 
         message = "Hello World!";
     }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendRedirect("/login.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getParameter("username"));
-        System.out.println(req.getParameter("password"));
-        resp.sendRedirect("/admin");
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        try {
+            boolean isValid = userDAO.validateAdmin(username, password, Role.ADMIN.name());
+            if (isValid) {
+                resp.sendRedirect("/admin");
+            } else {
+                resp.sendRedirect("/login");
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void destroy() {

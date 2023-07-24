@@ -32,15 +32,15 @@ public class UserDAO {
         return user;
     }
 
-    public User save(String firstName,String surname,String phoneNumber,String email) throws SQLException {
+    public User save(String firstName, String surname, String phoneNumber, String email) throws SQLException {
         User user = null;
         String insertQuery = " INSERT INTO users(first_name, surname, phone_number, email, role) " +
-                "VALUES('" +firstName + "', '" + surname + "', '+" + phoneNumber + "', '" + email + "', '" + Role.USER.name() + "'); ";
+                "VALUES('" + firstName + "', '" + surname + "', '" + phoneNumber + "', '" + email + "', '" + Role.USER.name() + "'); ";
         Statement statement = connection.createConnection().createStatement();
-         statement.executeUpdate(insertQuery,Statement.RETURN_GENERATED_KEYS);
+        statement.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
         ResultSet resultSet = statement.getGeneratedKeys();
         while (resultSet.next()) {
-            user=new User(
+            user = new User(
                     resultSet.getInt(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
@@ -51,6 +51,17 @@ public class UserDAO {
             );
         }
         return user;
+    }
+
+    public boolean validateAdmin(String username, String password, String role) throws SQLException {
+
+        Statement statement = connection.createConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery("select role from users where phone_number='" + username + "' and password='" + password + "';");
+        if (resultSet.next()) {
+            String roleName = resultSet.getString("role");
+            return roleName.equals(Role.ADMIN.name());
+        }
+        return false;
     }
 
     public static UserDAO getInstance() {
