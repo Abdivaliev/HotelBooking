@@ -125,7 +125,7 @@
                         <div class="d-flex justify-content-between mt-2">
                             <div>Room number</div>
                             <div>
-                                <%=s.getNumber()%>
+                                <%=s.getRoomNumber()%>
                             </div>
                         </div>
 <%--                        //gacha--%>
