@@ -14,6 +14,9 @@ import java.sql.SQLException;
 
 @WebServlet(name = "search", value = "/search-filter")
 public class FilterController extends HttpServlet {
+    private final RoomDAO roomDAO = RoomDAO.getInstance();
+    private final BookingDAO bookingDAO = BookingDAO.getInstance();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -24,15 +27,9 @@ public class FilterController extends HttpServlet {
 
         System.out.println(status + "  " + startDate + "   " + endDate + "    " + numberOfBeds);
 
-        try {
-            BookingDAO bookingDAO = new BookingDAO(ConnectionSource.instance().createConnection());
-            RoomDAO roomDAO = new RoomDAO(ConnectionSource.instance().createConnection());
-            req.setAttribute("lists", roomDAO.getAllRooms());
-            req.setAttribute("bookings", bookingDAO.getAllBookings());
-            getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        req.setAttribute("lists", roomDAO.getAllRooms());
+        req.setAttribute("bookings", bookingDAO.getAllBookings());
+        getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
         resp.sendRedirect("admin.jsp");
     }
 }

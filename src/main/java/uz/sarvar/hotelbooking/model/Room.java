@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uz.sarvar.hotelbooking.util.RoomStatus;
 
+import java.math.BigDecimal;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -14,10 +16,11 @@ public class Room {
     private Integer id;
     private boolean balcony;
     private String extra;
-    private boolean isBooked;
+    private boolean isBooked=false;
     private Integer numberOfBeds;
     private String status;
-    private Double square;
+    private BigDecimal square;
     private Integer numberOfRooms;
-    private Integer number;
+    private Integer roomNumber;
+    private String photoLink;
 }

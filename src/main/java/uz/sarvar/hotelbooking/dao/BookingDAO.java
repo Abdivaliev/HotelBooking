@@ -2,34 +2,36 @@ package uz.sarvar.hotelbooking.dao;
 
 import uz.sarvar.hotelbooking.ConnectionSource;
 import uz.sarvar.hotelbooking.model.Booking;
-import uz.sarvar.hotelbooking.model.Room;
 import uz.sarvar.hotelbooking.model.User;
 import uz.sarvar.hotelbooking.util.RoomStatus;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookingDAO {
-    private Connection connection;
-    private UserDAO userDAO = new UserDAO(ConnectionSource.instance().createConnection());
+    private ConnectionSource connection = ConnectionSource.instance();
+    private UserDAO userDAO = UserDAO.getInstance();
 
-    public BookingDAO(Connection connection) throws SQLException {
-        this.connection = connection;
-    }
+    private static final BookingDAO bookingDAO = new BookingDAO();
+
 
     public List<Booking> getAllBookings() {
         List<Booking> bookings = new ArrayList<>();
         String query = "SELECT * FROM booking";
-        try (Statement statement = connection.createStatement();
+        try (Statement statement = connection.createConnection().createStatement();
              ResultSet rs = statement.executeQuery(query)) {
             while (rs.next()) {
                 Booking booking = new Booking();
                 booking.setId(rs.getInt("id"));
-                booking.setStatus(String.valueOf(RoomStatus.valueOf(rs.getString("status"))));
+                booking.setStatusRoom(String.valueOf(RoomStatus.valueOf(rs.getString("status"))));
                 booking.setNumberOfBeds(rs.getInt("number_of_beds"));
-                booking.setStartDate(rs.getTimestamp("start_date"));
-                booking.setEndDate(rs.getTimestamp("end_date"));
+                booking.setStartDate(rs.getDate("start_date").toLocalDate());
+                booking.setEndDate(rs.getDate("end_date").toLocalDate());
                 // Assuming UserDAO has a method to get a User by id
                 User client = userDAO.getUserById(rs.getInt("client_id"));
                 booking.setClient(client);
@@ -41,4 +43,24 @@ public class BookingDAO {
         return bookings;
     }
 
+    public boolean save(String statusRoom, Integer numberOfBeds, String startDate, String endDate, String firstName, String surname, String phoneNumber, String email) throws SQLException {
+        User user = userDAO.save(firstName, surname, phoneNumber, email);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDate from = LocalDate.parse(startDate, formatter);
+        LocalDate to = LocalDate.parse(endDate, formatter);
+
+        String insertBookingQuery = "insert into booking (status, number_of_beds, start_date, end_date, client_id) " +
+                "values ('" + statusRoom + "','" + numberOfBeds + "'," + from + "," + to + "," + user.getId() + ");";
+
+        if (user != null) {
+            Statement statement = connection.createConnection().createStatement();
+            return statement.execute(insertBookingQuery);
+
+        }
+        return false;
+    }
+
+    public static BookingDAO getInstance() {
+        return bookingDAO;
+    }
 }

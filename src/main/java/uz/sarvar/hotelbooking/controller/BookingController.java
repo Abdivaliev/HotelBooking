@@ -1,5 +1,7 @@
 package uz.sarvar.hotelbooking.controller;
 
+import uz.sarvar.hotelbooking.dao.BookingDAO;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "booking", value = "/booking")
 public class BookingController extends HttpServlet {
     private String message;
+    private BookingDAO bookingDAO=BookingDAO.getInstance();
 
     public void init() {
         message = "Hello World!";
@@ -23,14 +26,15 @@ public class BookingController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getParameter("firstName"));
-        System.out.println(req.getParameter("surname"));
-        System.out.println(req.getParameter("status"));
-        System.out.println(req.getParameter("startDate"));
-        System.out.println(req.getParameter("endDate"));
-        System.out.println(req.getParameter("phoneNumber"));
-        System.out.println(req.getParameter("email"));
-        System.out.println(req.getParameter("numberOfBeds"));
+        String firstName = req.getParameter("firstName");
+        String surname = req.getParameter("surname");
+        String status = req.getParameter("status");
+        String startDate = req.getParameter("startDate");
+        String endDate = req.getParameter("endDate");
+        String phoneNumber = req.getParameter("phoneNumber");
+        String email = req.getParameter("email");
+        String numberOfBeds = req.getParameter("numberOfBeds");
+
 
     }
 

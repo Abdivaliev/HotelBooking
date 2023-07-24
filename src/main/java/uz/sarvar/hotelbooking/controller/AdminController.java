@@ -20,6 +20,8 @@ import java.util.List;
 @WebServlet(name = "admin", value = "/admin")
 public class AdminController extends HttpServlet {
     private String message;
+    private RoomDAO roomDAO=RoomDAO.getInstance();
+    private BookingDAO bookingDAO=BookingDAO.getInstance();
 
     public void init() {
 
@@ -27,15 +29,10 @@ public class AdminController extends HttpServlet {
     }
     @SneakyThrows
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try {
-            BookingDAO bookingDAO = new BookingDAO(ConnectionSource.instance().createConnection());
-            RoomDAO roomDAO  = new RoomDAO(ConnectionSource.instance().createConnection());
-            request.setAttribute("lists",roomDAO.getAllRooms());
-            request.setAttribute("bookings",bookingDAO.getAllBookings());
-            getServletContext().getRequestDispatcher("/admin.jsp").forward(request,response);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        request.setAttribute("lists",roomDAO.getAllRooms());
+        request.setAttribute("bookings",bookingDAO.getAllBookings());
+        getServletContext().getRequestDispatcher("/admin.jsp").forward(request,response);
     }
 
     @Override

@@ -146,7 +146,7 @@
                     </div>
                     <div class="col">
                         <label>Room number</label>
-                        <input type="text" name="roomNumber" class="form-control">
+                        <input type="number" name="roomNumber" class="form-control">
                     </div>
                     <div class="col-12 mt-3">
                         <button type="submit" class="btn btn-primary w-100">Booked</button>

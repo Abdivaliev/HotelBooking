@@ -1,16 +1,17 @@
 -- DDL
 
-CREATE TABLE Room
+CREATE TABLE room
 (
     id            SERIAL PRIMARY KEY,
-    balcony       BOOLEAN,
+    balcony       BOOLEAN DEFAULT FALSE,
     extra         VARCHAR(255),
-    isBooked      BOOLEAN,
+    isBooked      BOOLEAN DEFAULT FALSE,
     numberOfBeds  INTEGER,
-    status        VARCHAR(255),
-    square        INTEGER,
+    statusRoom    VARCHAR(255),
+    square        NUMERIC,
     numberOfRooms INTEGER,
-    number        INTEGER
+    roomNumber    INTEGER,
+    photoLink     TEXT
 );
 
 CREATE TABLE users
@@ -18,9 +19,10 @@ CREATE TABLE users
     id           SERIAL PRIMARY KEY,
     first_name   VARCHAR(255) NOT NULL,
     surname      VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(255) NOT NULL,
-    email        VARCHAR(255) NOT NULL,
-    role         VARCHAR(255) NOT NULL
+    phone_number VARCHAR(255) NOT NULL UNIQUE,
+    email        VARCHAR(255) NOT NULL UNIQUE,
+    role         VARCHAR(255) NOT NULL,
+    password     TEXT
 );
 
 CREATE TABLE booking
@@ -28,59 +30,33 @@ CREATE TABLE booking
     id             SERIAL PRIMARY KEY,
     status         VARCHAR(255) NOT NULL,
     number_of_beds INTEGER      NOT NULL,
-    start_date     TIMESTAMP    NOT NULL,
-    end_date       TIMESTAMP    NOT NULL,
+    start_date     DATE         NOT NULL,
+    end_date       DATE         NOT NULL,
     client_id      INTEGER      NOT NULL,
     FOREIGN KEY (client_id) REFERENCES users (id)
 );
 
+
 CREATE TABLE hotel
 (
-    id           SERIAL PRIMARY KEY,
-    name         VARCHAR(255) NOT NULL,
-    email        VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(255) NOT NULL,
-    description  VARCHAR(255)
-);
-
-CREATE TABLE price_by_status
-(
-    id             SERIAL PRIMARY KEY,
-    type_of_status VARCHAR(255) NOT NULL,
-    price          INTEGER      NOT NULL
-);
-
-CREATE TABLE price_by_square
-(
-    id             SERIAL PRIMARY KEY,
-    type_of_status VARCHAR(255) NOT NULL,
-    price          INTEGER      NOT NULL
-);
-
-CREATE TABLE price_by_each_bed
-(
     id          SERIAL PRIMARY KEY,
-    type_of_bed VARCHAR(255) NOT NULL,
-    price       INTEGER      NOT NULL
+    name        VARCHAR(255) NOT NULL,
+    email       VARCHAR(255) NOT NULL UNIQUE ,
+    phoneNumber VARCHAR(255) NOT NULL UNIQUE ,
+    description TEXT
 );
 
-CREATE TABLE price
+CREATE TABLE reservation
 (
-    id SERIAL PRIMARY KEY,
-    basic_price INTEGER NOT NULL
+    id         SERIAL PRIMARY KEY,
+    price      INTEGER NOT NULL,
+    startDate  DATE NOT NULL,
+    endDate    DATE NOT NULL,
+    clientName VARCHAR(255) NOT NULL,
+    roomNumber INTEGER NOT NULL,
+    hotelId    INTEGER REFERENCES hotel (id),
+    extraInfo  TEXT
 );
-
-ALTER TABLE price_by_status
-    ADD COLUMN price_id INTEGER,
-ADD FOREIGN KEY (price_id) REFERENCES price (id);
-
-ALTER TABLE price_by_square
-    ADD COLUMN price_id INTEGER,
-ADD FOREIGN KEY (price_id) REFERENCES price (id);
-
-ALTER TABLE price_by_each_bed
-    ADD COLUMN price_id INTEGER,
-ADD FOREIGN KEY (price_id) REFERENCES price (id);
 
 
 COMMIT;

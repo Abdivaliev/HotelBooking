@@ -32,7 +32,9 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       resp.sendRedirect("/admin");
+        System.out.println(req.getParameter("username"));
+        System.out.println(req.getParameter("password"));
+        resp.sendRedirect("/admin");
     }
 
     public void destroy() {

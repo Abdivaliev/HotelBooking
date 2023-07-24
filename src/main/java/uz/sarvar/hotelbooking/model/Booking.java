@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.sarvar.hotelbooking.util.RoomStatus;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -14,9 +14,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class Booking {
     private Integer id;
-    private String status;
+    private String statusRoom;
     private Integer numberOfBeds;
-    private Timestamp startDate;
-    private Timestamp endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private User client;
 }

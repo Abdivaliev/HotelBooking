@@ -30,23 +30,19 @@ public class ConnectionSource {
         return DriverManager.getConnection(DB_URL, USER, PASS);
     }
 
-    private boolean initialized = false;
 
     private ConnectionSource() {
         try {
             DriverManager.registerDriver(new org.postgresql.Driver());
 
-//            try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
-//                if (!initialized) {
-//                    try (Statement statement = conn.createStatement()) {
-//                        statement.execute(getSql("init-ddl.sql"));
-//                    }
-//                    try (Statement statement = conn.createStatement()) {
-//                        statement.execute(getSql("init-dml.sql"));
-//                    }
-//                    initialized = true;
-//                }
-//            }
+            try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
+                try (Statement statement = conn.createStatement()) {
+                    statement.execute(getSql("init-ddl.sql"));
+                }
+                try (Statement statement = conn.createStatement()) {
+                    statement.execute(getSql("init-dml.sql"));
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -12,6 +12,7 @@
 </head>
 <body>
 <nav class="navbar">
+
     <div></div>
     <div>
         <a href="login">
@@ -31,9 +32,9 @@
                     <option value="DELUXE">Deluxe</option>
                     <option value="PREMIUM">Premium</option>
                 </select>
-                <label class="btns" for="">Number of beads</label>
+                <label class="btns" for="">Number of beds</label>
                 <br>
-                <input class="form-control" type="text" name="numberOfBeds" required>
+                <input class="form-control" type="number" name="numberOfBeds" required>
                 <label class="btns" for="">Start date</label>
                 <br>
                 <input class="form-control" type="date" name="startDate" required>
@@ -41,15 +42,15 @@
                 <br>
                 <input class="form-control" type="date" name="endDate" required>
 
-                <label class="btns" for="">First name</label>
+                <label class="btns" >First name</label>
                 <br>
-                <input class="form-control" type="text" name="firstName">
+                <input class="form-control" type="text" name="firstName" required>
                 <label class="btns" for="">Surname</label>
                 <br>
-                <input class="form-control" type="text" name="surname">
+                <input class="form-control" type="text" name="surname" required>
                 <label class="btns" for="">Phone number</label>
                 <br>
-                <input class="form-control" type="text" name="phoneNumber" required>
+                <input class="form-control" type="number" name="phoneNumber" required>
                 <label class="btns" for="">E-mail</label>
                 <br>
                 <input class="form-control" type="text" name="email" required>

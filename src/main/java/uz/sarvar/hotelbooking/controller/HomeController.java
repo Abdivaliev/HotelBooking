@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "home", value = "/home")
 public class HomeController extends HttpServlet {
+    RoomDAO roomDAO=RoomDAO.getInstance();
     private String message;
 
     public void init() {
@@ -23,7 +24,6 @@ public class HomeController extends HttpServlet {
     }
     @SneakyThrows
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        RoomDAO roomDAO  = new RoomDAO(ConnectionSource.instance().createConnection());
         request.setAttribute("lists",roomDAO.getAllRooms());
         getServletContext().getRequestDispatcher("/home.jsp").forward(request,response);
     }
