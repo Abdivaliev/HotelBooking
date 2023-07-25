@@ -19,28 +19,39 @@ public class RoomDAO {
         String query = "SELECT * FROM room";
         try (Statement statement = connection.createConnection().createStatement();
              ResultSet resultSet = statement.executeQuery(query)) {
-            while (resultSet.next()) {
-                Room room = new Room();
-                room.setId(resultSet.getInt("id"));
-                room.setBalcony(resultSet.getBoolean("balcony"));
-                room.setExtra(resultSet.getString("extra"));
-                room.setBooked(resultSet.getBoolean("is_booked"));
-                room.setNumberOfBeds(resultSet.getInt("number_of_beds"));
-                room.setStatus(resultSet.getString("status_of_room"));
-                room.setSquare(resultSet.getBigDecimal("square"));
-                room.setNumberOfRooms(resultSet.getInt("number_of_rooms"));
-                room.setRoomNumber(resultSet.getInt("room_number"));
-                rooms.add(room);
-            }
+            roomInserter(rooms, resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return rooms;
     }
 
-//    public String save(){
-//
-//    }
+    public List<Room> getAllRoomsByParameter(String statusOfRoom, String startDate, String endDate, String numberOfBeds) throws SQLException {
+        List<Room> rooms = new ArrayList<>();
+
+        Statement statement = connection.createConnection().createStatement();
+        String sql = "SELECT * FROM room WHERE status_of_room = '" + statusOfRoom + "' AND is_booked = FALSE AND number_of_beds = " + numberOfBeds + " AND id NOT IN (SELECT id FROM booking WHERE start_date <= '" + endDate + "' AND end_date >= '" + startDate + "')";
+            ResultSet rs = statement.executeQuery(sql);
+        roomInserter(rooms, rs);
+        return rooms;
+    }
+
+    private void roomInserter(List<Room> rooms, ResultSet resultSet) throws SQLException {
+        while (resultSet.next()) {
+            Room room = new Room();
+            room.setId(resultSet.getInt("id"));
+            room.setBalcony(resultSet.getBoolean("balcony"));
+            room.setExtra(resultSet.getString("extra"));
+            room.setBooked(resultSet.getBoolean("is_booked"));
+            room.setNumberOfBeds(resultSet.getInt("number_of_beds"));
+            room.setStatusOfRoom(resultSet.getString("status_of_room"));
+            room.setSquare(resultSet.getBigDecimal("square"));
+            room.setNumberOfRooms(resultSet.getInt("number_of_rooms"));
+            room.setRoomNumber(resultSet.getInt("room_number"));
+            room.setPhotoLink(resultSet.getString("photoLink"));
+            rooms.add(room);
+        }
+    }
 
     public static RoomDAO getInstance(){
         return roomDAO;

@@ -26,5 +26,10 @@
         <url-pattern>/price</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>filter</servlet-name>
+        <url-pattern>/filter</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

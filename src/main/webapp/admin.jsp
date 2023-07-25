@@ -85,7 +85,7 @@
         <div class="col-sm-12 col-md-6 scrollable">
             <div class="col-md-12 sticky" style="height: 100px">
                 <div style="height: 100px">
-                    <form action="/search-filter" class="row" method="post" style="height: 100px">
+                    <form action="/filter" class="row" method="post" style="height: 100px">
                         <div class="col-md-3">
                             <label>Status</label>
                             <br>

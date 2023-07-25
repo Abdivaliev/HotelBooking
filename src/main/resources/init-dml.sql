@@ -24,4 +24,9 @@ VALUES (FALSE, 'NOTHING TO SAY GOODBYE', FALSE, 2, 'PREMIUM', 45.2, 2,7,'https:/
 
 --Default admin
 INSERT INTO users(FIRST_NAME, SURNAME, PHONE_NUMBER, EMAIL, ROLE, PASSWORD)
-VALUES ('Sarvar', 'Abdivaliyev', '+998949147959', 'sarvarabdivaliyev@gmail.com', 'ADMIN', 'admin')
+VALUES ('Sarvar', 'Abdivaliyev', 'ADMIN', 'sarvarabdivaliyev@gmail.com', 'ADMIN', 'admin');
+
+--Default Hotel
+
+INSERT INTO hotel( NAME, EMAIL, PHONE_NUMBER, DESCRIPTION)
+VALUES ('EPAM HOTEL','Epamhotel@epamhotel.com','998888001234','Hello! Welcome to Epam-Hotel and we are glad to see you here again!')

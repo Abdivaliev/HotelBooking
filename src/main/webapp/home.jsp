@@ -63,6 +63,8 @@
         <div class="col-sm-12 col-md-9 row">
             <% List<Room> stringList = (List<Room>) request.getAttribute("lists");%>
             <% for (Room s : stringList) {%>
+            <img src="<%=s.getPhotoLink() %>" alt="image not found" width="100%">
+
             <div class="col-md-4 p-3 shadow"><%=s.getRoomNumber()%>
             </div>
             <%

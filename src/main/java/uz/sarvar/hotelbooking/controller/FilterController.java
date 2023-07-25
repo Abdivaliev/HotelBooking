@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "search", value = "/search-filter")
+@WebServlet(name = "filter", value = "/filter")
 public class FilterController extends HttpServlet {
     private final RoomDAO roomDAO = RoomDAO.getInstance();
     private final BookingDAO bookingDAO = BookingDAO.getInstance();
