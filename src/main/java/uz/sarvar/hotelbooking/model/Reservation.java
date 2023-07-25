@@ -22,5 +22,5 @@ public class Reservation {
     private Integer roomNumber;
     private Hotel hotel;
     private String extraInfo;
-
+    private Booking booking;
 }

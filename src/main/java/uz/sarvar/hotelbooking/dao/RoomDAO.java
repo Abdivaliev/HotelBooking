@@ -48,7 +48,7 @@ public class RoomDAO {
             room.setSquare(resultSet.getBigDecimal("square"));
             room.setNumberOfRooms(resultSet.getInt("number_of_rooms"));
             room.setRoomNumber(resultSet.getInt("room_number"));
-            room.setPhotoLink(resultSet.getString("photoLink"));
+            room.setPhotoLink(resultSet.getString("photo_link"));
             rooms.add(room);
         }
     }
