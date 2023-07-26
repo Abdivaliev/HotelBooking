@@ -25,15 +25,8 @@ public class Reservation {
 
     public Double getPrice() {
         long days = ChronoUnit.DAYS.between(booking.getStartDate(), booking.getEndDate());
-        double basicPrice = room.getSquare() * 1 + booking.getNumberOfBeds() * 10 * days;
-        if (booking.getStatusRoom().equals(RoomStatus.STANDARD.name())) {
-            return basicPrice;
-        } else if (booking.getStatusRoom().equals(RoomStatus.DELUXE.name())) {
-            return 1.5 * basicPrice;
-        } else if (booking.getStatusRoom().equals(RoomStatus.PREMIUM.name())) {
-            return 2 * basicPrice;
-        }
-        return 0d;
+        return (double) (room.getPrice() * days);
+
     }
 
     public Reservation(String extraInfo, Room room, Hotel hotel, Booking booking) {

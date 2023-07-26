@@ -13,12 +13,8 @@ import java.sql.SQLException;
 
 @WebServlet(name = "booking", value = "/booking")
 public class BookingController extends HttpServlet {
-    private String message;
     private BookingDAO bookingDAO = BookingDAO.getInstance();
 
-    public void init() {
-        message = "Hello World!";
-    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.sendRedirect("/login.jsp");
@@ -47,6 +43,4 @@ public class BookingController extends HttpServlet {
 
     }
 
-    public void destroy() {
-    }
 }

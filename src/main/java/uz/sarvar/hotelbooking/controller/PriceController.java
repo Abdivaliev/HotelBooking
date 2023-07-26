@@ -13,12 +13,7 @@ import java.io.PrintWriter;
 
 @WebServlet(name = "price", value = "/price")
 public class PriceController extends HttpServlet {
-    private String message;
 
-    public void init() {
-
-        message = "Hello World!";
-    }
     @SneakyThrows
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -34,6 +29,5 @@ public class PriceController extends HttpServlet {
 
     }
 
-    public void destroy() {
-    }
+
 }

@@ -26,10 +26,6 @@ public class AdminController extends HttpServlet {
     private BookingDAO bookingDAO=BookingDAO.getInstance();
     private ReservationDAO reservationDAO=ReservationDAO.getInstance();
 
-    public void init() {
-
-        message = "Hello World!";
-    }
     @SneakyThrows
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("lists",roomDAO.getAllRooms());
@@ -47,6 +43,4 @@ public class AdminController extends HttpServlet {
 
     }
 
-    public void destroy() {
-    }
 }

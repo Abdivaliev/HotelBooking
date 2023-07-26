@@ -20,12 +20,8 @@ import java.util.List;
 public class HomeController extends HttpServlet {
     RoomDAO roomDAO=RoomDAO.getInstance();
     HotelDAO hotelDAO=HotelDAO.getInstance();
-    private String message;
 
-    public void init() {
 
-        message = "Hello World!";
-    }
     @SneakyThrows
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("lists",roomDAO.getAllRooms());
@@ -42,6 +38,4 @@ public class HomeController extends HttpServlet {
 
     }
 
-    public void destroy() {
-    }
 }

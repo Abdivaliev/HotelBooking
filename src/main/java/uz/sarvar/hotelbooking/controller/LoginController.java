@@ -22,13 +22,8 @@ import java.util.List;
 
 @WebServlet(name = "login", value = "/login")
 public class LoginController extends HttpServlet {
-    private String message;
     private UserDAO userDAO = UserDAO.getInstance();
 
-    public void init() {
-
-        message = "Hello World!";
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendRedirect("/login.jsp");
@@ -52,7 +47,5 @@ public class LoginController extends HttpServlet {
 
     }
 
-    public void destroy() {
 
-    }
 }

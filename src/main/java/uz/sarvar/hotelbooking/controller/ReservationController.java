@@ -19,9 +19,10 @@ public class ReservationController extends HttpServlet {
         String roomNumber = req.getParameter("roomNumber");
         try {
             reservationDAO.reserved(bookingNumber,roomNumber);
+            resp.sendRedirect("/admin");
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.sendRedirect("/error");
         }
     }
 }

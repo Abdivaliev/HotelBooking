@@ -59,4 +59,20 @@ CREATE TABLE reservation
     booking_id INTEGER REFERENCES booking (id)
 );
 
+CREATE OR REPLACE FUNCTION update_room_status_and_delete_reservation()
+RETURNS TRIGGER AS $$
+BEGIN
+UPDATE room SET is_booked = false WHERE id = (SELECT room_id FROM reservation WHERE booking_id = OLD.id);
+DELETE FROM reservation WHERE booking_id = OLD.id;
+RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_room_status_and_delete_reservation_trigger
+    AFTER INSERT  ON booking
+    FOR EACH ROW
+    EXECUTE FUNCTION update_room_status_and_delete_reservation();
+
+
+
 COMMIT;

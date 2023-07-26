@@ -47,13 +47,13 @@ public class ReservationDAO {
         Room roomByNumber = roomDAO.getRoomByNumber(roomNum);
         Booking bookingById = bookingDAO.getBookingById(bookedNum);
         Reservation reservation = new Reservation(
-                "Have a good day",
+                "Have a good day ;)",
                 roomByNumber,
                 hotelInfo,
                 bookingById
         );
 
-        Double price = reservation.getPrice();
+        double price = reservation.getPrice();
         Statement statement = connection.createConnection().createStatement();
         int executed = statement.executeUpdate("insert into reservation(price,extra_info, hotel_id, room_id, booking_id) " +
                 "VALUES ('" + price + "','" + reservation.getExtraInfo() + "','" + hotelInfo.getId() + "','" + roomByNumber.getId() + "','" + bookingById.getId() + "');");

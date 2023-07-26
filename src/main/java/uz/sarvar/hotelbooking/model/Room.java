@@ -7,6 +7,7 @@ import lombok.Setter;
 import uz.sarvar.hotelbooking.util.RoomStatus;
 
 import java.math.BigDecimal;
+import java.time.temporal.ChronoUnit;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,4 +24,17 @@ public class Room {
     private Integer numberOfRooms;
     private Integer roomNumber;
     private String photoLink;
+
+    public int getPrice() {
+        double basicPrice = square * 1 + numberOfBeds * 10 ;
+        if (statusOfRoom.equals(RoomStatus.STANDARD.name())) {
+            return (int) basicPrice;
+        } else if (statusOfRoom.equals(RoomStatus.DELUXE.name())) {
+            return (int) (1.5 * basicPrice);
+        } else if (statusOfRoom.equals(RoomStatus.PREMIUM.name())) {
+            return (int) (2 * basicPrice);
+        }
+        return 0;
+    }
+
 }

@@ -90,9 +90,9 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between mt-2 ">
-                    <div class="fw-bolder">Average price (in USA dollars)</div>
+                    <div class="fw-bolder">Average price for a day (in USA dollars)</div>
                     <div>
-                        <%=s.getSquare()%>
+                        <%=s.getPrice()%>
                     </div>
                 </div>
             </div>
