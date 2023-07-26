@@ -53,6 +53,7 @@ CREATE TABLE reservation
 (
     id         SERIAL PRIMARY KEY,
     extra_info TEXT,
+    price      DOUBLE PRECISION,
     hotel_id   INTEGER REFERENCES hotel (id),
     room_id    INTEGER REFERENCES room (id),
     booking_id INTEGER REFERENCES booking (id)

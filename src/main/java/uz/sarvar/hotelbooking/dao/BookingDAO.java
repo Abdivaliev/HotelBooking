@@ -27,7 +27,13 @@ public class BookingDAO {
              ResultSet rs = statement.executeQuery(query)) {
             while (rs.next()) {
                 Booking booking = new Booking();
-                bookingParser(booking, rs);
+                booking.setId(rs.getInt("id"));
+                booking.setStatusRoom(rs.getString("status_room"));
+                booking.setNumberOfBeds(rs.getInt("number_of_beds"));
+                booking.setStartDate(rs.getDate("start_date").toLocalDate());
+                booking.setEndDate(rs.getDate("end_date").toLocalDate());
+                User client = userDAO.getUserById(rs.getInt("client_id"));
+                booking.setClient(client);
                 bookings.add(booking);
             }
         } catch (SQLException e) {
@@ -38,26 +44,22 @@ public class BookingDAO {
 
     public Booking getBookingById(Integer id) throws SQLException {
 
-        String query = "SELECT * FROM booking where delete=false and id=" + id + ";";
+        String query = "SELECT * FROM booking where id=" + id + ";";
         Booking booking = new Booking();
         try (Statement statement = connection.createConnection().createStatement();
              ResultSet rs = statement.executeQuery(query)) {
             while (rs.next()) {
-                bookingParser(booking, rs);
+                booking.setId(rs.getInt("id"));
+                booking.setStatusRoom(rs.getString("status_room"));
+                booking.setNumberOfBeds(rs.getInt("number_of_beds"));
+                booking.setStartDate(rs.getDate("start_date").toLocalDate());
+                booking.setEndDate(rs.getDate("end_date").toLocalDate());
+                User client = userDAO.getUserById(rs.getInt("client_id"));
+                booking.setClient(client);
 
             }
         }
         return booking;
-    }
-
-    private void bookingParser(Booking booking, ResultSet rs) throws SQLException {
-        booking.setId(rs.getInt("id"));
-        booking.setStatusRoom(rs.getString("status_room"));
-        booking.setNumberOfBeds(rs.getInt("number_of_beds"));
-        booking.setStartDate(rs.getDate("start_date").toLocalDate());
-        booking.setEndDate(rs.getDate("end_date").toLocalDate());
-        User client = userDAO.getUserById(rs.getInt("client_id"));
-        booking.setClient(client);
     }
 
     public int save(String statusRoom, String numberOfBeds, String startDate, String endDate, String firstName, String surname, String phoneNumber, String email) throws SQLException {

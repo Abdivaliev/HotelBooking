@@ -5,6 +5,6 @@ import uz.sarvar.hotelbooking.model.Reservation;
 
 @Getter
 public class ReservationDTO {
-    private double price;
+
     private Reservation reservation;
 }

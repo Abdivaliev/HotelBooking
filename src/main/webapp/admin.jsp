@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="uz.sarvar.hotelbooking.model.Room" %>
 <%@ page import="uz.sarvar.hotelbooking.model.Booking" %>
+<%@ page import="uz.sarvar.hotelbooking.model.Reservation" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -175,6 +176,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <div class="col-sm-12 col-md-3 borderRight">
             <div class="row scrollable">
                 <div class="sticky py-3">
@@ -192,54 +196,57 @@
                         </div>
                     </form>
                 </div>
-                <% for (Booking s : bookingList) {%>
+
+                <% List<Reservation> reservations = (List<Reservation>) request.getAttribute("reservations");%>
+
+                <% for (Reservation s : reservations) {%>
                 <div class="col-md-12 p-3 shadow w-100">
                     <div class="d-flex">
-                        <div class="fw-bolder">First name</div>
+                        <div class="fw-bolder">First name</div>getBooking().
                         <div style="margin-left: 10px">
-                            <%=s.getClient().getFirstName()%>
+                            <%=s.getBooking().getClient().getFirstName()%>
                         </div>
                     </div>
                     <div class="d-flex">
                         <div class="fw-bolder">Surname</div>
                         <div style="margin-left: 10px">
-                            <%=s.getClient().getSurname()%>
+                            <%=s.getBooking().getClient().getSurname()%>
                         </div>
                     </div>
                     <div class="d-flex">
                         <div class="fw-bolder">Phone Number</div>
                         <div style="margin-left: 10px">
-                            <%=s.getClient().getPhoneNumber()%>
+                            <%=s.getBooking().getClient().getPhoneNumber()%>
                         </div>
                     </div>
                     <div class="d-flex">
                         <div class="fw-bolder">Phone Number</div>
                         <div style="margin-left: 10px">
-                            <%=s.getClient().getPhoneNumber()%>
+                            <%=s.getBooking().getClient().getPhoneNumber()%>
                         </div>
                     </div>
                     <div class="d-flex">
                         <div class="fw-bolder">Phone Number</div>
                         <div style="margin-left: 10px">
-                            <%=s.getClient().getPhoneNumber()%>
+                            <%=s.getBooking().getClient().getPhoneNumber()%>
                         </div>
                     </div>
                     <div class="d-flex">
                         <div class="fw-bolder">Phone Number</div>
                         <div style="margin-left: 10px">
-                            <%=s.getClient().getPhoneNumber()%>
+                            <%=s.getBooking().getClient().getPhoneNumber()%>
                         </div>
                     </div>
                     <div class="d-flex">
                         <div class="fw-bolder">Phone Number</div>
                         <div style="margin-left: 10px">
-                            <%=s.getClient().getPhoneNumber()%>
+                            <%=s.getBooking().getClient().getPhoneNumber()%>
                         </div>
                     </div>
                     <div class="d-flex">
                         <div class="fw-bolder">Phone Number</div>
                         <div style="margin-left: 10px">
-                            <%=s.getClient().getPhoneNumber()%>
+                            <%=s.getBooking().getClient().getPhoneNumber()%>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ import uz.sarvar.hotelbooking.util.RoomStatus;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Getter
@@ -17,12 +18,14 @@ import java.util.List;
 public class Reservation {
     private Integer id;
     private String extraInfo;
+    private double price;
     private Room room;
     private Hotel hotel;
     private Booking booking;
 
     public Double getPrice() {
-        double basicPrice = room.getSquare() * 1 + booking.getNumberOfBeds() * 10;
+        long days = ChronoUnit.DAYS.between(booking.getStartDate(), booking.getEndDate());
+        double basicPrice = room.getSquare() * 1 + booking.getNumberOfBeds() * 10 * days;
         if (booking.getStatusRoom().equals(RoomStatus.STANDARD.name())) {
             return basicPrice;
         } else if (booking.getStatusRoom().equals(RoomStatus.DELUXE.name())) {

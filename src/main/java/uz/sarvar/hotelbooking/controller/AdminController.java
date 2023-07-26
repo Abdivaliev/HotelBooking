@@ -3,7 +3,9 @@ package uz.sarvar.hotelbooking.controller;
 import lombok.SneakyThrows;
 import uz.sarvar.hotelbooking.ConnectionSource;
 import uz.sarvar.hotelbooking.dao.BookingDAO;
+import uz.sarvar.hotelbooking.dao.ReservationDAO;
 import uz.sarvar.hotelbooking.dao.RoomDAO;
+import uz.sarvar.hotelbooking.model.Reservation;
 import uz.sarvar.hotelbooking.model.Room;
 
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ public class AdminController extends HttpServlet {
     private String message;
     private RoomDAO roomDAO=RoomDAO.getInstance();
     private BookingDAO bookingDAO=BookingDAO.getInstance();
+    private ReservationDAO reservationDAO=ReservationDAO.getInstance();
 
     public void init() {
 
@@ -29,9 +32,9 @@ public class AdminController extends HttpServlet {
     }
     @SneakyThrows
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         request.setAttribute("lists",roomDAO.getAllRooms());
         request.setAttribute("bookings",bookingDAO.getAllBookings());
+        request.setAttribute("reservations",reservationDAO.getAllReservation());
         getServletContext().getRequestDispatcher("/admin.jsp").forward(request,response);
     }
 
