@@ -16,7 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Reservation {
     private Integer id;
-    private Integer price;
     private String extraInfo;
     private Room room;
     private Hotel hotel;
@@ -34,4 +33,10 @@ public class Reservation {
         return 0d;
     }
 
+    public Reservation(String extraInfo, Room room, Hotel hotel, Booking booking) {
+        this.extraInfo = extraInfo;
+        this.room = room;
+        this.hotel = hotel;
+        this.booking = booking;
+    }
 }

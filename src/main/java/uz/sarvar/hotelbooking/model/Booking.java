@@ -16,6 +16,7 @@ public class Booking {
     private Integer id;
     private String statusRoom;
     private Integer numberOfBeds;
+    private boolean delete = false;
     private LocalDate startDate;
     private LocalDate endDate;
     private User client;

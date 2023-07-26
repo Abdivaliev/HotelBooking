@@ -4,6 +4,7 @@ import uz.sarvar.hotelbooking.ConnectionSource;
 import uz.sarvar.hotelbooking.model.Booking;
 import uz.sarvar.hotelbooking.model.User;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,24 +22,42 @@ public class BookingDAO {
 
     public List<Booking> getAllBookings() {
         List<Booking> bookings = new ArrayList<>();
-        String query = "SELECT * FROM booking";
+        String query = "SELECT * FROM booking where delete=false";
         try (Statement statement = connection.createConnection().createStatement();
              ResultSet rs = statement.executeQuery(query)) {
             while (rs.next()) {
                 Booking booking = new Booking();
-                booking.setId(rs.getInt("id"));
-                booking.setStatusRoom(rs.getString("status_room"));
-                booking.setNumberOfBeds(rs.getInt("number_of_beds"));
-                booking.setStartDate(rs.getDate("start_date").toLocalDate());
-                booking.setEndDate(rs.getDate("end_date").toLocalDate());
-                User client = userDAO.getUserById(rs.getInt("client_id"));
-                booking.setClient(client);
+                bookingParser(booking, rs);
                 bookings.add(booking);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return bookings;
+    }
+
+    public Booking getBookingById(Integer id) throws SQLException {
+
+        String query = "SELECT * FROM booking where delete=false and id=" + id + ";";
+        Booking booking = new Booking();
+        try (Statement statement = connection.createConnection().createStatement();
+             ResultSet rs = statement.executeQuery(query)) {
+            while (rs.next()) {
+                bookingParser(booking, rs);
+
+            }
+        }
+        return booking;
+    }
+
+    private void bookingParser(Booking booking, ResultSet rs) throws SQLException {
+        booking.setId(rs.getInt("id"));
+        booking.setStatusRoom(rs.getString("status_room"));
+        booking.setNumberOfBeds(rs.getInt("number_of_beds"));
+        booking.setStartDate(rs.getDate("start_date").toLocalDate());
+        booking.setEndDate(rs.getDate("end_date").toLocalDate());
+        User client = userDAO.getUserById(rs.getInt("client_id"));
+        booking.setClient(client);
     }
 
     public int save(String statusRoom, String numberOfBeds, String startDate, String endDate, String firstName, String surname, String phoneNumber, String email) throws SQLException {
@@ -59,6 +78,26 @@ public class BookingDAO {
 
         }
         return 0;
+    }
+
+    public boolean delete(int id) throws SQLException {
+
+
+        String updateQuery = "UPDATE booking SET delete = true WHERE id =" + id + ";";
+
+        try (Connection conn = connection.createConnection();
+             Statement stmt = conn.createStatement()) {
+
+            int executed = stmt.executeUpdate(updateQuery);
+            if (executed > 0) {
+                return true;
+            }
+            return false;
+
+
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     public static BookingDAO getInstance() {

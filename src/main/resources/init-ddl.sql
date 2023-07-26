@@ -8,7 +8,7 @@ CREATE TABLE room
     is_booked       BOOLEAN DEFAULT FALSE,
     number_of_beds  INTEGER,
     status_of_room  VARCHAR(255),
-    square          NUMERIC,
+    square          DOUBLE PRECISION,
     number_of_rooms INTEGER,
     room_number     INTEGER,
     photo_link      TEXT
@@ -32,6 +32,7 @@ CREATE TABLE booking
     number_of_beds INTEGER      NOT NULL,
     start_date     DATE         NOT NULL,
     end_date       DATE         NOT NULL,
+    delete         BOOLEAN      DEFAULT FALSE,
     client_id      INTEGER      NOT NULL,
     FOREIGN KEY (client_id) REFERENCES users (id)
 );
@@ -50,32 +51,11 @@ CREATE TABLE hotel
 
 CREATE TABLE reservation
 (
-    id          SERIAL PRIMARY KEY,
-    price       INTEGER,
-    extra_info  TEXT,
-    hotel_id    INTEGER REFERENCES hotel (id),
+    id         SERIAL PRIMARY KEY,
+    extra_info TEXT,
+    hotel_id   INTEGER REFERENCES hotel (id),
     room_id    INTEGER REFERENCES room (id),
-    booking_id  INTEGER REFERENCES booking (id)
+    booking_id INTEGER REFERENCES booking (id)
 );
-
-CREATE
-OR REPLACE FUNCTION update_room_status()
-RETURNS TRIGGER AS $$
-BEGIN
-UPDATE room
-SET is_booked = FALSE
-WHERE room_number = OLD.room_number
-  AND OLD.end_date < CURRENT_DATE;
-RETURN NEW;
-END;
-$$
-LANGUAGE plpgsql;
-
-CREATE TRIGGER update_room_status_trigger
-    AFTER UPDATE
-    ON booking
-    FOR EACH ROW
-    EXECUTE FUNCTION update_room_status();
-
 
 COMMIT;
