@@ -38,8 +38,7 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println(req.getParameter("username"));
         System.out.println(req.getParameter("password"));
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.write("tizimga xush kelibsiz");
+
 
     }
 
