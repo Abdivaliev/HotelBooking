@@ -31,5 +31,20 @@
         <url-pattern>/filter</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>error</servlet-name>
+        <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>success</servlet-name>
+        <url-pattern>/success</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>reservation</servlet-name>
+        <url-pattern>/reservation</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

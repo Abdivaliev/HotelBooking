@@ -22,7 +22,7 @@ public class PriceController extends HttpServlet {
     @SneakyThrows
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("/login.jsp");
     }
 
     @Override

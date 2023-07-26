@@ -30,6 +30,6 @@ public class FilterController extends HttpServlet {
         req.setAttribute("lists", roomDAO.getAllRooms());
         req.setAttribute("bookings", bookingDAO.getAllBookings());
         getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
-        resp.sendRedirect("admin.jsp");
+        resp.sendRedirect("/admin.jsp");
     }
 }

@@ -29,4 +29,4 @@ VALUES ('Sarvar', 'Abdivaliyev', 'ADMIN', 'sarvarabdivaliyev@gmail.com', 'ADMIN'
 --Default Hotel
 
 INSERT INTO hotel(name, email, phone_number, address, photo_link, description)
-values ('Epam Hotel','epam@gmail.com','778','Tashkent','image not found','welcome to hotel');
+values ('Epam International Hotel','epam@gmail.com','778881020','Tashkent, Uzbekistan','https://i.ytimg.com/vi/RPb3h51sHAs/hqdefault.jpg','Welcome to epam international hotel again!');

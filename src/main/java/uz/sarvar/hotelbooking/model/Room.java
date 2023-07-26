@@ -19,7 +19,7 @@ public class Room {
     private boolean isBooked=false;
     private Integer numberOfBeds;
     private String statusOfRoom;
-    private BigDecimal square;
+    private Double square;
     private Integer numberOfRooms;
     private Integer roomNumber;
     private String photoLink;

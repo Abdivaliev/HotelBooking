@@ -11,7 +11,7 @@ CREATE TABLE room
     square          NUMERIC,
     number_of_rooms INTEGER,
     room_number     INTEGER,
-    photo_link       TEXT
+    photo_link      TEXT
 );
 
 CREATE TABLE users
@@ -19,8 +19,8 @@ CREATE TABLE users
     id           SERIAL PRIMARY KEY,
     first_name   VARCHAR(255) NOT NULL,
     surname      VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(255) NOT NULL UNIQUE,
-    email        VARCHAR(255) NOT NULL UNIQUE,
+    phone_number VARCHAR(255) NOT NULL,
+    email        VARCHAR(255) NOT NULL,
     role         VARCHAR(255) NOT NULL,
     password     TEXT
 );
@@ -44,7 +44,7 @@ CREATE TABLE hotel
     email        VARCHAR(255) NOT NULL UNIQUE,
     phone_number VARCHAR(255) NOT NULL UNIQUE,
     address      VARCHAR(255) NOT NULL,
-    photo_link    TEXT NOT NULL ,
+    photo_link   TEXT         NOT NULL,
     description  TEXT
 );
 
@@ -52,12 +52,9 @@ CREATE TABLE reservation
 (
     id          SERIAL PRIMARY KEY,
     price       INTEGER,
-    start_date  DATE,
-    end_date    DATE,
-    client_name TEXT,
-    room_number INTEGER,
-    hotel_id    INTEGER REFERENCES hotel (id),
     extra_info  TEXT,
+    hotel_id    INTEGER REFERENCES hotel (id),
+    room_id    INTEGER REFERENCES room (id),
     booking_id  INTEGER REFERENCES booking (id)
 );
 

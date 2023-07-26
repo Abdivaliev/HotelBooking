@@ -3,7 +3,6 @@ package uz.sarvar.hotelbooking.dao;
 import uz.sarvar.hotelbooking.ConnectionSource;
 import uz.sarvar.hotelbooking.model.Booking;
 import uz.sarvar.hotelbooking.model.User;
-import uz.sarvar.hotelbooking.util.RoomStatus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,11 +27,10 @@ public class BookingDAO {
             while (rs.next()) {
                 Booking booking = new Booking();
                 booking.setId(rs.getInt("id"));
-                booking.setStatusRoom(String.valueOf(RoomStatus.valueOf(rs.getString("status_of_room"))));
+                booking.setStatusRoom(rs.getString("status_room"));
                 booking.setNumberOfBeds(rs.getInt("number_of_beds"));
                 booking.setStartDate(rs.getDate("start_date").toLocalDate());
                 booking.setEndDate(rs.getDate("end_date").toLocalDate());
-                // Assuming UserDAO has a method to get a User by id
                 User client = userDAO.getUserById(rs.getInt("client_id"));
                 booking.setClient(client);
                 bookings.add(booking);
@@ -43,7 +41,7 @@ public class BookingDAO {
         return bookings;
     }
 
-    public boolean save(String statusRoom, String numberOfBeds, String startDate, String endDate, String firstName, String surname, String phoneNumber, String email) throws SQLException {
+    public int save(String statusRoom, String numberOfBeds, String startDate, String endDate, String firstName, String surname, String phoneNumber, String email) throws SQLException {
         User user = userDAO.save(firstName, surname, phoneNumber, email);
         System.out.println(startDate);
         System.out.println(endDate);
@@ -57,10 +55,10 @@ public class BookingDAO {
 
         if (user != null) {
             Statement statement = connection.createConnection().createStatement();
-            return statement.execute(insertBookingQuery);
+            return statement.executeUpdate(insertBookingQuery);
 
         }
-        return false;
+        return 0;
     }
 
     public static BookingDAO getInstance() {

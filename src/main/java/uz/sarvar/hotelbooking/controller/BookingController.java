@@ -1,6 +1,5 @@
 package uz.sarvar.hotelbooking.controller;
 
-import lombok.SneakyThrows;
 import uz.sarvar.hotelbooking.dao.BookingDAO;
 
 import javax.servlet.ServletException;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 
@@ -23,7 +21,7 @@ public class BookingController extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("/login.jsp");
     }
 
     @Override
@@ -37,9 +35,14 @@ public class BookingController extends HttpServlet {
         String email = req.getParameter("email");
         String numberOfBeds = req.getParameter("numberOfBeds");
         try {
-            boolean saved = bookingDAO.save(statusRoom, numberOfBeds, startDate, endDate, firstName, surname, phoneNumber, email);
+                int saved = bookingDAO.save(statusRoom, numberOfBeds, startDate, endDate, firstName, surname, phoneNumber, email);
+            if (saved==0) {
+                resp.sendRedirect("/error");
+            } else {
+                resp.sendRedirect("/success");
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.sendRedirect("/error");
         }
 
     }

@@ -2,6 +2,7 @@ package uz.sarvar.hotelbooking.controller;
 
 import lombok.SneakyThrows;
 import uz.sarvar.hotelbooking.ConnectionSource;
+import uz.sarvar.hotelbooking.dao.HotelDAO;
 import uz.sarvar.hotelbooking.dao.RoomDAO;
 import uz.sarvar.hotelbooking.model.Room;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @WebServlet(name = "home", value = "/home")
 public class HomeController extends HttpServlet {
     RoomDAO roomDAO=RoomDAO.getInstance();
+    HotelDAO hotelDAO=HotelDAO.getInstance();
     private String message;
 
     public void init() {
@@ -27,6 +29,7 @@ public class HomeController extends HttpServlet {
     @SneakyThrows
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setAttribute("lists",roomDAO.getAllRooms());
+        request.setAttribute("hotelInfo",hotelDAO.getHotelInfo());
         getServletContext().getRequestDispatcher("/home.jsp").forward(request,response);
     }
 
